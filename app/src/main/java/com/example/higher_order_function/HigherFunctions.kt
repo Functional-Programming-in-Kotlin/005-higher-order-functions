@@ -17,35 +17,13 @@ fun logToWindows(msg: String) {
     println(msg + " From Windows")
 }
 
-fun getValue(number: Int, logger: Logger): String {
+fun getValue(number: Int, logger: (String) -> Unit): String {
     val result = "Something $number"
-    logger.print(result)
+    logger(result)
     return result
 }
 
-interface Logger {
-    fun print(msg: String)
-}
-
-class ConsoleLogger: Logger {
-    override fun print(msg: String) {
-        logToConsole(msg)
-    }
-}
-
-class FileLogger: Logger {
-    override fun print(msg: String) {
-        logToFile(msg)
-    }
-}
-
-class WindowsLogger: Logger {
-    override fun print(msg: String) {
-        logToWindows(msg)
-    }
-}
 
 fun main(args: Array<String>) {
-    getValue(4, ConsoleLogger())
-
+    getValue(4, ::logToFile)
 }
