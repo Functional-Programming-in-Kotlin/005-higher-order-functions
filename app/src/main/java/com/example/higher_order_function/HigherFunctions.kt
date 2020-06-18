@@ -17,15 +17,35 @@ fun logToWindows(msg: String) {
     println(msg + " From Windows")
 }
 
-fun getValue(number: Int, type: Int) {
+fun getValue(number: Int, logger: Logger): String {
     val result = "Something $number"
-    when (type) {
-        1 -> logToConsole(result)
-        2 -> logToFile(result)
-        3 -> logToWindows(result)
+    logger.print(result)
+    return result
+}
+
+interface Logger {
+    fun print(msg: String)
+}
+
+class ConsoleLogger: Logger {
+    override fun print(msg: String) {
+        logToConsole(msg)
+    }
+}
+
+class FileLogger: Logger {
+    override fun print(msg: String) {
+        logToFile(msg)
+    }
+}
+
+class WindowsLogger: Logger {
+    override fun print(msg: String) {
+        logToWindows(msg)
     }
 }
 
 fun main(args: Array<String>) {
-    getValue(4, 2)
+    getValue(4, ConsoleLogger())
+
 }
