@@ -4,6 +4,7 @@ package com.example.higher_order_function
 //
 //}
 
+// Firma funcion: (String) -> Unit
 fun logToConsole(msg: String) {
     println(msg + " From Console")
 }
@@ -16,6 +17,15 @@ fun logToWindows(msg: String) {
     println(msg + " From Windows")
 }
 
+fun getValue(number: Int, type: Int) {
+    val result = "Something $number"
+    when (type) {
+        1 -> logToConsole(result)
+        2 -> logToFile(result)
+        3 -> logToWindows(result)
+    }
+}
+
 fun main(args: Array<String>) {
-    logToWindows("Hello Kotlin FP")
+    getValue(4, 2)
 }
