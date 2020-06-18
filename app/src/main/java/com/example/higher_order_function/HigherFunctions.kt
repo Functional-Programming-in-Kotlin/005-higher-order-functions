@@ -4,10 +4,18 @@ package com.example.higher_order_function
 //
 //}
 
-fun log() {
-    print("Hello")
+fun logToConsole(msg: String) {
+    println(msg + " From Console")
+}
+
+fun logToFile(msg: String) {
+    println(msg + " From File")
+}
+
+fun logToWindows(msg: String) {
+    println(msg + " From Windows")
 }
 
 fun main(args: Array<String>) {
-    log()
+    logToWindows("Hello Kotlin FP")
 }
