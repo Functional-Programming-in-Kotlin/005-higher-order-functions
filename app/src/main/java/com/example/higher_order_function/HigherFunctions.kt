@@ -17,13 +17,23 @@ fun logToWindows(msg: String) {
     println(msg + " From Windows")
 }
 
-fun getValue(number: Int, logger: (String) -> Unit): String {
+fun getValue(number: Int, logger: Logger): String {
     val result = "Something $number"
-    logger(result)
+    val logFunction = logger.print()
+    logFunction(result)
     return result
 }
 
+enum class Logger {
+    CONSOLE, WINDOWS, FILE;
+
+    fun print(): (String) -> Unit = when(this) {
+        CONSOLE -> ::logToConsole
+        WINDOWS -> ::logToWindows
+        FILE -> ::logToFile
+    }
+}
 
 fun main(args: Array<String>) {
-    getValue(4, ::logToFile)
+    getValue(4, Logger.CONSOLE)
 }
