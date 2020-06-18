@@ -19,15 +19,14 @@ fun logToWindows(msg: String) {
 
 fun getValue(number: Int, logger: Logger): String {
     val result = "Something $number"
-    val logFunction = logger.print()
-    logFunction(result)
+    logger.print(result)
     return result
 }
 
 enum class Logger {
     CONSOLE, WINDOWS, FILE;
 
-    fun print(): (String) -> Unit = when(this) {
+    val print: (String) -> Unit  get() = when(this) {
         CONSOLE -> ::logToConsole
         WINDOWS -> ::logToWindows
         FILE -> ::logToFile
